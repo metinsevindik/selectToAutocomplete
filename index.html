@@ -12,10 +12,16 @@
 	      $('select').selectToAutocomplete();
 	      $('form').submit(function(){
 	        alert( $(this).serialize() );
-	        return false;
+	        return false; 
 	      });
 	    });
 	  })(jQuery);
+
+    var valid_values = context.$select_field.find('option').map(function (i, option) { return $(option).text(); });
+    
+      if (($.inArray($text_field.val(), valid_values) < 0) && typeof settings['handle_invalid_input'] === 'function') {
+        settings['handle_invalid_input'](context);
+      }
 	</script>
 	<link rel="stylesheet" href="jquery-ui.css">
 	<style>
